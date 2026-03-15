@@ -3,20 +3,20 @@
 
 // ���������
 var WaitingPlayersTime = 10;
-var BuildBaseTime = 60;
-var GameModeTime = 1200;
-var EndOfMatchTime = 10;
+var BuildBaseTime = 0;
+var GameModeTime = 99999;
+var EndOfMatchTime = 1;
 var InfTimer = 1; //время бесконечного таймера
 var myJust = 0;
-var myBluePlayers = 0; //количество людей
+var myBluePlayers = 456; //количество людей
 var myGameState = 0; //состояние игры
-var myAllPlayers = 0; //количество всех игроков
+var myAllPlayers = 700; //количество всех игроков
 var myGameStarted = 0; //старт игры
 var myBlockGameLoad = 0;
 var WeaponAreasTag = "wp";
-var myRedPlayers = 0;
-var myRedTeamBlock = 0;
-var myBluePlayersAlive = 0;
+var myRedPlayers = 1;
+var myRedTeamBlock = 999999;
+var myBluePlayersAlive = 456;
 // ��������� ����
 var WaitingStateValue = "Waiting";
 var BuildModeStateValue = "BuildMode";
@@ -51,8 +51,8 @@ Properties.GetContext().GameModeName.Value = "GameModes/Team Dead Match";
 TeamsBalancer.IsAutoBalance = false;
 Ui.GetContext().MainTimerId.Value = mainTimer.Id;
 // ������� �������
-Teams.Add("Blue", "ЛЮДИ", { b: 150 });
-Teams.Add("Red", "ЗОМБИ", { g : 150 });
+Teams.Add("Blue", "ИГРОКИ", { b: 150 });
+Teams.Add("Red", "ФРОНТМЕН", { g : 0 });
 var blueTeam = Teams.Get("Blue");
 var redTeam = Teams.Get("Red");
 blueTeam.Spawns.SpawnPointsGroups.Add(1);
@@ -101,7 +101,7 @@ LeaderBoard.PlayersWeightGetter.Set(function(player) {
 
 // ������ ��� �������� ������
 
-Ui.GetContext().TeamProp2.Value = { Team: "Red", Prop: "Kills" };
+Ui.GetContext().TeamProp2.Value = { Team: "Red", Prop: "Knife" };
 
 
 
@@ -115,7 +115,7 @@ weaponTrigger.Enable = true;
 weaponTrigger.OnEnter.Add(function (player) {
 	if (player.Inventory.Melee.Value)
   {
-    player.Ui.Hint.Value = "ВЫ ЗОМБИ";
+    player.Ui.Hint.Value = "ВЫ ФРОНТМЕН";
   }
   else
   {
